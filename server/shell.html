@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" class="is-booting is-scroll-blocked">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!-- The server replaces title / description / OG / canonical / JSON-LD / nw:route per route (appended at
+         the end of head) and puts a per-request CSP nonce on every script tag. These are static-preview defaults. -->
+    <title>Hussain Singapuri — AI Engineer</title>
+    <meta name="description" content="Hussain Singapuri is an AI engineer in Pune, India, building AI agents, automations and websites that feel premium.">
+    <meta name="theme-color" content="#0A0D00">
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="/css/tokens.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/pages.css">
+
+    <!-- Boot config: inline on purpose so it needs the server's CSP nonce.
+         Runs before first paint: applies the persisted theme and the reduced-motion class. -->
+    <script>
+      (function () {
+        var d = document.documentElement;
+        window.__NW__ = { api: '/api', version: '1.0.0', startedAt: Date.now() };
+        try { if (localStorage.getItem('hs-theme') === 'contrasted') d.classList.add('theme-contrasted'); } catch (e) {}
+        var reduced = (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || /[?&]reduced=1/.test(location.search);
+        if (reduced) { d.classList.add('is-reduced-motion', 'is-work-static'); d.classList.remove('is-scroll-blocked'); }
+        // Only "/" plays the preloader; other routes and repeat visits in this tab skip the 5s scroll lock.
+        var seen = false; try { seen = sessionStorage.getItem('hs-intro') === '1'; } catch (e) {}
+        if (location.pathname !== '/' || seen) { d.classList.add('no-intro'); d.classList.remove('is-scroll-blocked'); }
+        // Safety net: never leave the page invisible/locked if JS modules fail to run.
+        setTimeout(function () { if (!window.__NW_APP__) { d.classList.remove('is-booting', 'is-scroll-blocked'); d.classList.add('no-intro', 'is-work-static', 'no-custom-scrollbar'); var i = document.querySelector('.js-intro'); if (i) i.remove(); } }, 4000);
+      })();
+    </script>
+
+    <!-- Pinned libraries (classic scripts, executed in order before the module). If the CDN fails the
+         app falls back to native scroll, no intro, and a static work grid. -->
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EasePack.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script type="module" src="/js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="site-wrapper js-site-wrapper">
+      <header class="site-head" data-intersect>
+        <div class="site-head__container">
+          <div class="sb-logo js-logo">
+            <a href="/" data-link>
+              <svg viewBox="0 0 280 280" aria-hidden="true" focusable="false"><rect x="0" y="0" width="40" height="280"/><rect x="80" y="0" width="40" height="280"/><rect x="40" y="120" width="40" height="40"/><rect x="160" y="0" width="120" height="40"/><rect x="160" y="0" width="40" height="160"/><rect x="160" y="120" width="120" height="40"/><rect x="240" y="120" width="40" height="160"/><rect x="160" y="240" width="120" height="40"/></svg>
+              <span class="u-sr-only">Hussain Singapuri — home</span>
+            </a>
+          </div>
+          <div class="sb-console" aria-hidden="true">
+            <div class="sb-console__inner"><span class="sb-console__text js-console"></span></div>
+          </div>
+          <nav class="sb-menu" aria-label="Primary">
+            <ul class="sb__list">
+              <li class="sb__item js-menu-item"><a href="/#about" class="js-menu-link"><span class="sb__text">About</span></a></li>
+              <li class="sb__item js-menu-item"><a href="/#work" class="js-menu-link"><span class="sb__text">Work</span></a></li>
+              <li class="sb__item js-menu-item"><a href="/#contact" class="js-menu-link"><span class="sb__text">Contact</span></a></li>
+              <li class="sb__item js-menu-item"><a href="/book" data-link><span class="sb__text">Book</span></a></li>
+            </ul>
+          </nav>
+          <ul class="sb-socials">
+            <li class="sb__item"><a href="https://github.com/huss2003" target="_blank" rel="noopener noreferrer"><span class="sb__icon sb__icon--github" aria-hidden="true"></span><span class="u-sr-only">GitHub (opens in a new tab)</span></a></li>
+            <li class="sb__item"><a href="https://www.linkedin.com/in/hussain-singapuri-18437225a/" target="_blank" rel="noopener noreferrer"><span class="sb__icon sb__icon--linkedin" aria-hidden="true"></span><span class="u-sr-only">LinkedIn (opens in a new tab)</span></a></li>
+          </ul>
+          <button class="sb-contrast js-contrast" type="button" aria-pressed="false">
+            <span class="sb__icon" aria-hidden="true"></span>
+            <span class="u-sr-only">Paper mode (higher contrast)</span>
+          </button>
+          <aside class="sb-availability" aria-label="Availability">
+            <p>
+              <span class="sb__line"><span class="sb__text js-availability">Building globally from Pune, India.</span></span>
+              <span class="sb__line"><span class="sb__text">Available for freelance work →</span> <a href="/#contact" class="sb__link js-menu-link">Hire me</a></span>
+            </p>
+          </aside>
+          <a href="/book" class="sb-qr-code js-qr-code" data-link title="Book a call">
+            <img src="/images/pattern.svg" alt="Book a call" width="72" height="72">
+          </a>
+          <button class="sb-menu-toggle js-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+            <span class="sb-burger" aria-hidden="true"></span><span class="sb-menu-toggle__label">Menu</span><span class="u-sr-only"> (navigation)</span>
+          </button>
+        </div>
+      </header>
+
+      <main id="main" class="site-main js-view" tabindex="-1">
+        <noscript>
+          <section class="page"><div class="page-card"><h1 class="page-card__title">Hussain Singapuri — AI Engineer</h1><div class="page-card__body"><p>This portfolio needs JavaScript for its animated sections. See my work on <a href="https://github.com/huss2003">GitHub</a> or reach me on <a href="https://www.linkedin.com/in/hussain-singapuri-18437225a/">LinkedIn</a>.</p></div></div></section>
+        </noscript>
+      </main>
+
+      <footer class="site-foot">
+        <div class="site-foot__meta">© <span class="js-year">2026</span> Hussain Singapuri · AI Engineer · Pune, India</div>
+        <div class="site-foot__logo">
+          <a href="/" data-link>
+            <svg viewBox="0 0 280 280" aria-hidden="true" focusable="false"><rect x="0" y="0" width="40" height="280"/><rect x="80" y="0" width="40" height="280"/><rect x="40" y="120" width="40" height="40"/><rect x="160" y="0" width="120" height="40"/><rect x="160" y="0" width="40" height="160"/><rect x="160" y="120" width="120" height="40"/><rect x="240" y="120" width="40" height="160"/><rect x="160" y="240" width="120" height="40"/></svg>
+            <span class="u-sr-only">Hussain Singapuri — back to home</span>
+          </a>
+        </div>
+        <div class="site-foot__links"><a href="/book" data-link>Book a call</a><a href="/#contact" class="js-menu-link">Contact</a></div>
+      </footer>
+    </div>
+
+    <!-- Outside .site-wrapper: its clip-path would clip these fixed layers -->
+    <div class="mobile-menu js-mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+      <button class="mobile-menu__close js-menu-close" type="button">Close</button>
+      <ul class="mobile-menu__list">
+        <li><a href="/#about" class="js-menu-link">About <small>01</small></a></li>
+        <li><a href="/#work" class="js-menu-link">Work <small>02</small></a></li>
+        <li><a href="/#contact" class="js-menu-link">Contact <small>03</small></a></li>
+        <li><a href="/book" data-link>Book a call <small>04</small></a></li>
+      </ul>
+      <div class="mobile-menu__foot"><span>Pune · Available</span><a href="https://github.com/huss2003" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/hussain-singapuri-18437225a/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+    </div>
+
+    <div class="site-intro js-intro" aria-hidden="true">
+      <div class="sb-logo">
+        <div class="sb__path sb__path--v sb__path--v-1 js-logo-line-v"></div>
+        <div class="sb__path sb__path--h sb__path--h-1 js-logo-line-h"></div>
+        <div class="sb__path sb__path--v sb__path--v-2 js-logo-line-v"></div>
+        <div class="sb__path sb__path--h sb__path--h-2 js-logo-line-h"></div>
+        <div class="sb__path sb__path--v sb__path--v-3 js-logo-line-v"></div>
+        <div class="sb__path sb__path--h sb__path--h-3 js-logo-line-h"></div>
+        <div class="sb__path sb__path--v sb__path--v-4 js-logo-line-v"></div>
+        <div class="sb__path sb__path--h sb__path--h-4 js-logo-line-h"></div>
+        <div class="sb__path sb__path--v sb__path--v-5 js-logo-line-v"></div>
+      </div>
+      <div class="site-intro__border site-intro__border--top js-border-top"></div>
+      <div class="site-intro__border site-intro__border--left js-border-left"></div>
+      <div class="site-intro__border site-intro__border--right js-border-right"></div>
+      <button class="site-intro__skip js-intro-skip" type="button" tabindex="-1">Skip intro (any key)</button>
+    </div>
+    <div class="site-mount js-mount" aria-hidden="true"></div>
+    <div class="site-contrast-mask js-contrast-mask" aria-hidden="true"></div>
+    <div class="site-scrollbar js-scrollbar" aria-hidden="true">
+      <div class="site-scrollbar__thumb js-thumb"></div>
+    </div>
+  </body>
+</html>

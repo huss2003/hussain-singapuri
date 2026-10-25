@@ -1,0 +1,53 @@
+/* ==========================================================================
+   tokens.css — design tokens (mirrors the original's :root + .theme-contrasted)
+   Original palette → skeleton palette (user request: red → bright volt)
+     --color-primary   #f40c3f (red page)      → #C6FF00 (volt page)
+     --color-secondary #160000 (ink/rules/frame)→ #0A0D00
+     --color-shadow    #540000                 → #3A4A00
+     --color-white     #fff0eb                 → kept
+   Paper mode (.theme-contrasted) swaps ONLY primary + shadow, like the original.
+   ========================================================================== */
+:root {
+  --color-primary: #c6ff00;
+  --color-secondary: #0a0d00;
+  --color-shadow: #3a4a00;
+  --color-white: #fff0eb;
+  --color-volt: #c6ff00;          /* hard-coded in hatch patterns / contrast mask (the original hard-coded #f40c3f there) */
+  --color-error: #0a0d00;         /* errors use ink + an icon, never colour alone */
+
+  /* Free stand-ins (Google Fonts) for the original's three voices */
+  --font-family-bigger: "Anton", "Arial Narrow", sans-serif;           /* Bigger Display 700 */
+  --font-family-editorial: "Instrument Serif", Georgia, serif;          /* PP Editorial New 200/400 */
+  --font-family-fraktion: "JetBrains Mono", ui-monospace, monospace;    /* PP Fraktion Mono 400/700 */
+
+  /* Anton is ~25% wider than Bigger Display; every display size is multiplied by this
+     so line breaks and proportions match the original's screenshots. */
+  --display-k: 0.74;
+  /* Instrument Serif 400 is optically heavier than Editorial Ultralight 200 at the same size. */
+  --editorial-weight: 400;
+
+  --font-size-base: 16px;
+  --font-height-base: 1.48;
+  --font-spacing-base: -0.025em;
+
+  --frame: 1rem;                   /* the dark window-bezel frame (body padding in the original) */
+  --header-h: 6rem;
+
+  /* Easing vocabulary (CSS) — copied from the original */
+  --ease-snap: cubic-bezier(1, 0, 0, 1);
+  --ease-quint-inout: cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-quint-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-cubic-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --ease-cubic-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-expo-out: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.theme-contrasted {
+  --color-primary: #fff2ed;
+  --color-shadow: #45493a;
+}
+
+/* phone = (max-width:767px) and (orientation:landscape), (max-width:576px) */
+@media only screen and (max-width: 767px) and (orientation: landscape), only screen and (max-width: 576px) {
+  :root { --frame: 0.5rem; --header-h: 4rem; }
+}
