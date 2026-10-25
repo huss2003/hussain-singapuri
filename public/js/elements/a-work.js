@@ -19,7 +19,7 @@ export function generatePoster(seedText, label, w = 1082, h = 636) {
   x.strokeStyle = '#C6FF00'; x.lineWidth = 3;
   const cx = w * (0.3 + rnd() * 0.4), cy = h * (0.3 + rnd() * 0.4);
   for (let i = 1; i < 7; i++) { x.beginPath(); x.arc(cx, cy, i * h * 0.06 * (1 + rnd() * 0.3), 0, Math.PI * 2); x.stroke(); }
-  x.fillStyle = '#C6FF00'; x.font = '700 22px "JetBrains Mono", monospace';
+  x.fillStyle = '#C6FF00'; x.font = '700 22px "Azeret Mono", monospace';
   x.fillText(String(label || '').toUpperCase(), 32, h - 32);
   return c.toDataURL('image/png');
 }

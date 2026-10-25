@@ -15,16 +15,14 @@
   --color-volt: #c6ff00;          /* hard-coded in hatch patterns / contrast mask (the original hard-coded #f40c3f there) */
   --color-error: #0a0d00;         /* errors use ink + an icon, never colour alone */
 
-  /* Free stand-ins (Google Fonts) for the original's three voices */
-  --font-family-bigger: "Anton", "Arial Narrow", sans-serif;           /* Bigger Display 700 */
-  --font-family-editorial: "Instrument Serif", Georgia, serif;          /* PP Editorial New 200/400 */
-  --font-family-fraktion: "JetBrains Mono", ui-monospace, monospace;    /* PP Fraktion Mono 400/700 */
+  /* Three voices: a condensed industrial display, a light book serif, a technical mono */
+  --font-family-bigger: "Big Shoulders Display", "Arial Narrow", sans-serif;  /* display, 800 */
+  --font-family-editorial: "Spectral", Georgia, serif;                        /* reading, 300 */
+  --font-family-fraktion: "Azeret Mono", ui-monospace, monospace;             /* labels, 400/700 */
 
-  /* Anton is ~25% wider than Bigger Display; every display size is multiplied by this
-     so line breaks and proportions match the original's screenshots. */
-  --display-k: 0.74;
-  /* Instrument Serif 400 is optically heavier than Editorial Ultralight 200 at the same size. */
-  --editorial-weight: 400;
+  /* Display sizes are multiplied by this so line lengths match the layout grid. */
+  --display-k: 0.9;
+  --editorial-weight: 300;
 
   --font-size-base: 16px;
   --font-height-base: 1.48;

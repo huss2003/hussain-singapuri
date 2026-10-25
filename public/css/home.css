@@ -1,7 +1,7 @@
 /* ==========================================================================
    home.css — hero, a-waves, a-separator, about/awards, work scene, my-way,
    CTA (GO → LET'S ROCK), enquiry form. Values from the original index.css.
-   Display sizes are multiplied by --display-k (Anton is wider than Bigger Display).
+   Display sizes are multiplied by --display-k (see tokens.css).
    ========================================================================== */
 
 /* ---------- a-waves (hero Perlin line field) ---------- */
@@ -352,7 +352,7 @@ a-work .a__caption {
   will-change: opacity, transform;
 }
 .s-work .s__scene .s__scene__work {
-  position: absolute; top: 50%; left: 50%; z-index: 2;
+  position: absolute; top: 50%; left: 50%; z-index: 5;   /* cards always above the letter tunnel */
   transform: rotateY(calc(var(--progress) * -20deg))
     translate3d(calc(var(--progress) * (50vw + 100%) - 50%), calc(var(--y) * 50% - 50%), calc(var(--progress) * var(--progress) * -5rem))
     scale(var(--size));

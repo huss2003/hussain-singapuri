@@ -124,7 +124,7 @@ export class Work {
         span.dataset.letter = L.el.textContent;
         span.style.top = `${L.top}px`;
         span.style.left = `${L.left}px`;
-        span.style.zIndex = String(s !== 1 && s !== 2 && (s + this.letters.length + o) % 5 === 0 ? 3 : 1);
+        span.style.zIndex = '1'; // letters always sit behind the project cards
         span.style.setProperty('--iy', String(((s + 1) / (this.letters.length + 1) - 0.5) * 2));
         span.style.setProperty('--progress', '0.5');
         this.scene.appendChild(span);
