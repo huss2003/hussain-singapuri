@@ -26,6 +26,16 @@ export function boot() {
       await setMeta('content', rest);
       await setMeta('schema_version', SCHEMA_VERSION);
       await bumpContent();
+    } else {
+      // Seed upgrades: when data/content.json carries a newer seed_version, refresh the non-project
+      // content (site, credentials, timeline, services). Projects stay as edited in /admin.
+      const seed = JSON.parse(fs.readFileSync(config.contentFile, 'utf8'));
+      const cur = await getMeta('content', {});
+      if ((seed.seed_version || 1) > (cur.seed_version || 1)) {
+        const { projects, _note, ...rest } = seed;
+        await setMeta('content', rest);
+        await bumpContent();
+      }
     }
   })().catch((e) => { booted = null; throw e; });
   return booted;
@@ -51,7 +61,7 @@ export async function refresh() {
     client_url: r.url, repo: r.repo, tags: r.tags, year: r.year, poster: r.poster, summary: r.summary,
     caption_key: `#hs${String(r.year || 26).slice(-2)}-${String(++k).padStart(4, '0')}/${n}`,
   }));
-  cache.data = { ...base, projects, site: { ...base.site, projects: n } };
+  cache.data = { ...base, projects };
   cache.etag = `"${crypto.createHash('sha1').update(JSON.stringify(cache.data)).digest('hex').slice(0, 16)}"`;
   cache.version = ver;
   return cache;

@@ -45,7 +45,7 @@ test('SEO: home is server-rendered with Person JSON-LD and a CSP nonce; unknown 
   const c = client();
   const home = await c('GET', '/');
   assert.equal(home.status, 200);
-  assert.match(home.data, /<title>Hussain Singapuri — AI Engineer/);
+  assert.match(home.data, /<title>Hussain Singapuri — Full-stack developer &amp; AI engineer/);
   assert.match(home.data, /"@type":"Person"/);
   assert.match(home.headers.get('content-security-policy'), /nonce-/);
   assert.equal((await c('GET', '/nope')).status, 404);

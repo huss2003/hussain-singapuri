@@ -9,8 +9,8 @@
   "country": "IN",
   "locale": "en_IN",
   "years": 3,
-  "projects": 13,
-  "tagline": "AI agents, automations and websites that feel premium.",
+  "projects": 30,
+  "tagline": "Full-stack web apps, AI agents and automations that feel premium.",
   "availability": "Building globally from Pune, India. Available for freelance work.",
   "socials": [
    {
@@ -281,21 +281,37 @@
  "credentials": [
   {
    "big": "3 YRS",
-   "label": "Full stack + AI agents at a US medtech company",
+   "label": "Full stack web developer + AI agents at a US medtech company",
    "kind": "stat"
   },
   {
-   "big": "13",
-   "label": "Shipped projects: websites, stores and AI systems",
+   "big": "30+",
+   "label": "Shipped projects: web apps, stores, sites and AI systems",
    "kind": "stat"
   },
   {
-   "big": "5+",
-   "label": "Live Play Store apps pen-tested",
+   "big": "5",
+   "label": "Apps live on Google Play",
    "kind": "stat"
   },
   {
-   "text": "Claude Certified Developer — Foundations",
+   "text": "Claude Certified Developer — Foundations (CCDV-F)",
+   "kind": "text"
+  },
+  {
+   "text": "Claude Certified Orchestrator — Foundations (CCAO-F)",
+   "kind": "text"
+  },
+  {
+   "text": "Full-stack web: React · Next.js · Node · Postgres · Stripe",
+   "kind": "text"
+  },
+  {
+   "text": "Google Cloud Generative AI Leader",
+   "kind": "text"
+  },
+  {
+   "text": "Claude Code 101 & Claude Code in Action",
    "kind": "text"
   },
   {
@@ -304,22 +320,6 @@
   },
   {
    "text": "CTO & Principal Course Architect — NeuroNetworks AI Ed",
-   "kind": "text"
-  },
-  {
-   "text": "LLM inference · RAG · multi-agent systems · evals",
-   "kind": "text"
-  },
-  {
-   "text": "Next.js · Node · Postgres · GSAP · three.js",
-   "kind": "text"
-  },
-  {
-   "text": "App pen-testing · SSRF hardening · webhook signing",
-   "kind": "text"
-  },
-  {
-   "text": "Automations, webhooks and CRM integrations",
    "kind": "text"
   }
  ],
@@ -337,7 +337,7 @@
    {
     "id": "t02",
     "year": 2023,
-    "caption": "Joined a US medtech company as a full stack developer",
+    "caption": "Joined a US medtech company as a full stack web developer",
     "image": "/images/timeline/t02.jpg",
     "width": 640,
     "height": 800
@@ -353,7 +353,7 @@
    {
     "id": "t04",
     "year": null,
-    "caption": "Security-tested 5+ live Play Store apps",
+    "caption": "5 apps live on Google Play, security-tested",
     "image": "/images/timeline/t04.jpg",
     "width": 640,
     "height": 800
@@ -385,7 +385,7 @@
    {
     "id": "t08",
     "year": 2026,
-    "caption": "Claude Certified Developer — Foundations",
+    "caption": "Claude Certified Developer & Orchestrator — Foundations",
     "image": "/images/timeline/t08.jpg",
     "width": 640,
     "height": 800
@@ -458,5 +458,6 @@
   ],
   "weeks": 4
  },
- "console": []
+ "console": [],
+ "seed_version": 2
 }

@@ -25,9 +25,9 @@ const jsonLd = (obj) => JSON.stringify(obj).replace(/</g, '\\u003c');
 function routeMeta(pathname, base) {
   const { site, projects, services } = content();
   const person = {
-    '@type': 'Person', '@id': `${base}/#person`, name: site.owner, jobTitle: site.role, url: `${base}/`, image: `${base}/images/og.jpg`,
+    '@type': 'Person', '@id': `${base}/#person`, name: site.owner, jobTitle: ['AI Engineer', 'Full-stack Web Developer'], url: `${base}/`, image: `${base}/images/og.jpg`,
     alumniOf: { '@type': 'CollegeOrUniversity', name: 'Vishwakarma Institute of Technology, Pune' },
-    hasCredential: { '@type': 'EducationalOccupationalCredential', name: 'Claude Certified Developer — Foundations' },
+    hasCredential: ['Claude Certified Developer — Foundations (CCDV-F)', 'Claude Certified Orchestrator — Foundations (CCAO-F)', 'Google Cloud Generative AI Leader', 'Claude Code 101', 'Claude Code in Action'].map((name) => ({ '@type': 'EducationalOccupationalCredential', name })),
     address: { '@type': 'PostalAddress', addressLocality: site.location, addressCountry: site.country },
     knowsAbout: ['AI agents', 'LLM inference', 'RAG', 'Multi-agent systems', 'Workflow automation', 'Full-stack web development', 'Creative web development'],
     sameAs: site.socials.map((x) => x.url),
@@ -35,8 +35,8 @@ function routeMeta(pathname, base) {
   if (pathname === '/') {
     return {
       route: 'home', status: 200, indexable: true,
-      title: `${site.owner} — ${site.role} · AI agents, automations & websites`,
-      description: `${site.owner} is an AI engineer in ${site.location}, India: 3 years building web apps and AI agents for a US medtech company, ${projects.length} shipped projects. ${site.tagline}`.slice(0, 300),
+      title: `${site.owner} — Full-stack developer & AI engineer`,
+      description: `${site.owner} is a full-stack web developer and AI engineer in ${site.location}, India: 3 years building web apps and AI agents for a US medtech company, 30+ shipped projects, 5 apps live on Google Play. ${site.tagline}`.slice(0, 300),
       jsonld: {
         '@context': 'https://schema.org',
         '@graph': [

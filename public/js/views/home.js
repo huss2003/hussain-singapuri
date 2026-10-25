@@ -19,9 +19,11 @@ function aboutCopy(site) {
   const v = (site.ventures || [])[0];
   const link = (x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}<span class="u-sr-only"> (opens in a new tab)</span></a>`;
   return `
-    <p>I'm Hussain, a software developer turned AI engineer. For three years I built web apps and AI agents for a US medtech company, and security-tested more than five of its live Play Store apps.</p>
-    <p>Now I build AI agents that answer leads and book jobs, RAG systems that cite their sources, an LLM inference engine from scratch,
-    full-stack stores, and websites with motion people remember. I'm CTO of ${v ? link(v) : 'an AI education startup'}, and I use AI every day to ship fast without cutting corners.</p>`;
+    <p>I'm Hussain, a full stack web developer turned AI engineer. For three years I built web apps and AI agents for a US medtech company:
+    React and Next.js front ends, Node and Python APIs, Postgres, auth and payments, plus five apps live on Google Play.</p>
+    <p>Since then I've shipped ${esc(site.projects || 30)}+ projects: full-stack stores with Stripe and admin panels, motion-heavy sites,
+    AI agents that answer leads and book jobs, RAG that cites its sources, and an LLM inference engine from scratch.
+    I'm CTO of ${v ? link(v) : 'an AI education startup'}.</p>`;
 }
 
 function credentialsMarkup(items = []) {
@@ -53,11 +55,50 @@ function workMarkup(projects = []) {
     return `<a-work class="s__scene__work js-work" data-slug="${esc(p.slug)}" data-label="${esc(label)}" progress="1">
       ${open}
         <span class="a__media"><img class="a__video js-video" src="${esc(p.poster)}" alt="${esc(p.title)}${p.tags ? ` — ${esc(p.tags.join(', '))}` : ''}" width="1082" height="636" loading="lazy" decoding="async"></span>
-        <span class="a__caption"><span class="a__caption__text">${esc(p.client || p.title)}</span><span class="a__caption__key" aria-hidden="true">${esc(p.caption_key || '')}</span></span>
+        <span class="a__caption"><span class="a__caption__text">${esc(p.client || p.title)}${hasUrl ? ' <span class="a__open">↗ Open</span>' : ''}</span><span class="a__caption__key" aria-hidden="true">${esc(p.caption_key || '')}</span></span>
         <span class="a__summary">${esc(p.clip || '')}${p.tags?.length ? ` · ${esc(p.tags.join(' · '))}` : ''} — ${esc(p.summary || '')}${hasUrl ? `<span class="u-sr-only"> — opens ${p.kind === 'ai' && /github/.test(p.client_url) ? 'the repository' : 'the live site'} in a new tab</span>` : ''}</span>
       ${close}
     </a-work>`;
   }).join('');
+}
+
+const SERVICES = [
+  ['Full-stack web apps', 'React / Next.js front ends, Node & Python APIs, Postgres, auth'],
+  ['E-commerce & payments', 'Carts, stock, Stripe Checkout, webhooks, order emails'],
+  ['Dashboards & admin', 'Internal tools, CRMs, analytics, role-based access'],
+  ['AI agents & RAG', 'Tool-using agents, grounded chat with citations, evals'],
+  ['Automations', 'Webhooks, CRM syncs, lead follow-up, n8n / Make / Zapier'],
+  ['Motion websites', 'GSAP, Lenis, three.js, scroll stories that feel premium'],
+];
+
+function indexMarkup(projects = []) {
+  const kindLabel = (p) => (/github\.com/.test(p.client_url) ? 'Repo' : 'Live site');
+  return `
+  <section class="s-index" id="projects" data-intersect aria-labelledby="index-title" tabindex="-1">
+    <div class="s__head">
+      <h2 class="s__title" id="index-title">What I build</h2>
+      <ul class="s__services">${SERVICES.map(([t, d], i) => `<li><span class="s__num">${String(i + 1).padStart(2, '0')}</span><strong>${esc(t)}</strong><span>${esc(d)}</span></li>`).join('')}</ul>
+    </div>
+    <div class="s__bar">
+      <h2 class="s__label" id="projects-title">Selected projects <span>(${projects.length})</span> · click to open</h2>
+      <div class="s__filters" role="group" aria-label="Filter projects">
+        <button type="button" class="js-filter" data-kind="all" aria-pressed="true">All</button>
+        <button type="button" class="js-filter" data-kind="web" aria-pressed="false">Websites</button>
+        <button type="button" class="js-filter" data-kind="ai" aria-pressed="false">AI systems</button>
+      </div>
+    </div>
+    <ul class="s__list" aria-labelledby="projects-title">${projects.map((p, i) => `
+      <li class="s__item" data-kind="${esc(p.kind || 'web')}">
+        <a class="s__row js-track js-row" href="${esc(p.client_url)}" target="_blank" rel="noopener noreferrer" data-slug="${esc(p.slug)}" data-img="${esc(p.poster)}">
+          <span class="s__n">${String(i + 1).padStart(2, '0')}</span>
+          <span class="s__t">${esc(p.title)}</span>
+          <span class="s__c">${esc(p.clip || '')}</span>
+          <span class="s__g">${esc((p.tags || []).join(' · '))}</span>
+          <span class="s__o">${kindLabel(p)} <span aria-hidden="true">↗</span><span class="u-sr-only"> (opens in a new tab)</span></span>
+        </a>
+      </li>`).join('')}</ul>
+    <div class="s__preview js-preview" aria-hidden="true"><img alt="" width="1082" height="636"></div>
+  </section>`;
 }
 
 function catcherLines(title = 'Shipping code since 2022') {
@@ -213,11 +254,31 @@ export async function mount(root, { app }) {
   </section>
 
   <a-separator data-intersect class="style--secondary" id="after-work" tabindex="-1" data-words="Ship|It|Fast"></a-separator>
+  ${indexMarkup(content.projects)}
   ${myWayMarkup(content.timeline)}
   ${ctaMarkup()}
   ${enquiryMarkup()}`;
 
   app.observe(root);
+  // project index: filters + a preview image that follows the pointer (fine pointers only)
+  const idx = qs('.s-index', root);
+  if (idx) {
+    const btns = [...idx.querySelectorAll('.js-filter')];
+    btns.forEach((b) => b.addEventListener('click', () => {
+      btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      idx.querySelectorAll('.s__item').forEach((li) => { li.hidden = b.dataset.kind !== 'all' && li.dataset.kind !== b.dataset.kind; });
+    }));
+    const prev = qs('.js-preview', idx), img = prev.querySelector('img');
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches && !document.documentElement.classList.contains('is-reduced-motion')) {
+      let x = 0, y = 0, tx = 0, ty = 0, raf = 0;
+      const loop = () => { x += (tx - x) * 0.18; y += (ty - y) * 0.18; prev.style.transform = `translate3d(${x}px, ${y}px, 0)`; raf = prev.classList.contains('is-on') ? requestAnimationFrame(loop) : 0; };
+      idx.querySelectorAll('.js-row').forEach((row) => {
+        row.addEventListener('pointerenter', () => { img.src = row.dataset.img; prev.classList.add('is-on'); if (!raf) raf = requestAnimationFrame(loop); });
+        row.addEventListener('pointerleave', () => prev.classList.remove('is-on'));
+      });
+      idx.addEventListener('pointermove', (e) => { const r = idx.getBoundingClientRect(); tx = e.clientX - r.left + 24; ty = e.clientY - r.top - 120; });
+    }
+  }
   // outbound project clicks feed the "most-clicked projects" panel in /admin
   root.addEventListener('click', (e) => {
     const a = e.target.closest && e.target.closest('.js-track');
