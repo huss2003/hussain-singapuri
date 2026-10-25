@@ -107,8 +107,8 @@ html.is-reduced-motion .s-hero, html.no-intro .s-hero { opacity: 1; }
 @keyframes s-hero-move-to-bottom { 0% { transform: translateZ(0); } to { transform: translate3d(0, 100%, 0); } }
 /* SplitText chars: each inner shows its letter ×3 in a row (::before) and ×3 in a column (::after),
    so translating the inner by 100% in any direction lands on an identical copy ("slot" flip). */
-.s-hero .s__title .char { display: inline-block; clip-path: inset(0 0.005em); color: transparent; }
-.s-hero .s__title .char__inner { position: relative; top: 0.06em; display: block; color: transparent; will-change: transform; }
+.s-hero .s__title .char { display: inline-block; vertical-align: top; margin: -0.15em 0; clip-path: inset(0 0.005em); color: transparent; }
+.s-hero .s__title .char__inner { position: relative; top: 0.06em; display: block; line-height: 1.1em; color: transparent; will-change: transform; }
 .s-hero .s__title .char__inner::before {
   content: attr(data-letter) attr(data-letter) attr(data-letter);
   position: absolute; top: 0; left: 50%; transform: translate3d(-50%, 0, 0);
@@ -117,7 +117,7 @@ html.is-reduced-motion .s-hero, html.no-intro .s-hero { opacity: 1; }
 .s-hero .s__title .char__inner::after {
   content: attr(data-letter) attr(data-letter) attr(data-letter);
   position: absolute; top: 50%; left: 0; width: 100%; transform: translate3d(0, -50%, 0);
-  color: var(--color-secondary); word-break: break-all; text-align: center;
+  color: var(--color-secondary); white-space: normal; word-break: break-all; text-align: center;
 }
 .s-hero .s__title .to-top .char__inner { animation: s-hero-move-to-top 1s var(--ease-quint-inout) 1 forwards; }
 .s-hero .s__title .to-right .char__inner { animation: s-hero-move-to-right 1s var(--ease-quint-inout) 1 forwards; }

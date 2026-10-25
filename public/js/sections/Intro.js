@@ -26,6 +26,9 @@ export class Intro {
     const vBars = qsa('.js-logo-line-v', this.el);
     const hBars = qsa('.js-logo-line-h', this.el);
     const top = qs('.js-border-top', this.el), left = qs('.js-border-left', this.el), right = qs('.js-border-right', this.el);
+    const meta = qsa('.js-intro-meta > *', this.el);
+    const countEl = qs('.js-intro-count', this.el);
+    const counter = { v: 0 };
 
     const tl = gsap.timeline();
     this.tl = tl;
@@ -37,6 +40,10 @@ export class Intro {
     tl.set(vBars, { transformOrigin: '50% 0' });
     tl.fromTo(vBars, { scaleY: 1 }, { scaleY: 0, duration: 1, ease: 'power4.in', immediateRender: false, stagger: 0.1 }, 2);
     tl.fromTo(hBars, { scaleY: 1 }, { scaleY: 0, duration: 0.5, ease: 'power4.in', immediateRender: false, stagger: 0.1 }, 2.1);
+    // name + role rise in, a 000→100 counter runs while the monogram draws, then all of it clears
+    tl.fromTo(meta, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, ease: 'expo.out', stagger: 0.1 }, 0.25);
+    if (countEl) tl.to(counter, { v: 100, duration: 1.9, ease: 'power2.inOut', onUpdate: () => { countEl.textContent = String(Math.round(counter.v)).padStart(3, '0'); } }, 0.1);
+    tl.to([...meta, countEl].filter(Boolean), { yPercent: -110, opacity: 0, duration: 0.6, ease: 'power4.in', stagger: 0.05 }, 2.05);
     tl.from(top, { scaleY: 0, duration: 3, ease: 'power3.inOut' }, 1);
     tl.from([left, right], { scaleX: 0, duration: 3, ease: 'power3.inOut' }, 1);
     tl.call(() => this.fireIntro(), null, '-=1.85');                // ≈ 2.15s

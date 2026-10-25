@@ -58,7 +58,15 @@ export class Hero {
       title.setAttribute('aria-label', this.words.map((w) => w.textContent.trim()).join(' '));
       this.words.forEach((w) => w.setAttribute('aria-hidden', 'true'));
     }
-    if (!this.isWaiting && window.gsap) window.gsap.set(qsa('.char__inner', this.el), { y: '-100%' });
+    // A resize while the intro is running re-splits the words into NEW nodes the running tween doesn't own;
+    // put them straight into their resting place so the headline can never get stuck half-dropped.
+    if ((!this.isWaiting || this.started) && window.gsap) window.gsap.set(qsa('.char__inner', this.el), { y: '-100%' });
+  }
+
+  settle() {
+    const gsap = env.gsap;
+    const inners = qsa('.char__inner', this.el);
+    if (gsap) gsap.set(inners, { y: '-100%' }); else inners.forEach((i) => { i.style.transform = 'translateY(-100%)'; });
   }
 
   intro(e) {
@@ -70,6 +78,7 @@ export class Hero {
     const inners = qsa('.char__inner', content);
     const separators = qsa('.js-separator', content);
     const star = qs('.js-star', content);
+    this.started = true;
     if (instant) {
       this.el.style.opacity = 1;
       if (gsap) gsap.set(inners, { y: '-100%' }); else inners.forEach((i) => { i.style.transform = 'translateY(-100%)'; });
@@ -91,7 +100,9 @@ export class Hero {
       .from(star, { rotate: 90, duration: 2, ease: 'expo.out' }, 1.5)
       .fromTo(inners, { y: '-200%' }, { y: '-100%', duration: 2, ease: 'expo.inOut', stagger: 0.02 }, 0.45)
       .from(separators, { y: (i) => (i % 2 === 0 ? '-100%' : '100%'), duration: 1.5, ease: 'expo.inOut' }, 0.75)
-      .call(() => { this.isWaiting = false; });
+      .call(() => { this.settle(); this.isWaiting = false; });
+    // safety net: background tabs throttle rAF — whatever happens, the headline is readable after 6s
+    setTimeout(() => { if (this.isWaiting) { tl.progress(1); this.settle(); } }, 6000);
   }
 
   animateChar() {
