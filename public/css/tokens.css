@@ -16,7 +16,7 @@
   --color-error: #0a0d00;         /* errors use ink + an icon, never colour alone */
 
   /* Three voices: a condensed industrial display, a light book serif, a technical mono */
-  --font-family-bigger: "Big Shoulders Display", "Arial Narrow", sans-serif;  /* display, 800 */
+  --font-family-bigger: "Big Shoulders Display", Impact, "Arial Narrow Bold", "Arial Narrow", sans-serif;  /* display, 800 */
   --font-family-editorial: "Spectral", Georgia, serif;                        /* reading, 300 */
   --font-family-fraktion: "Azeret Mono", ui-monospace, monospace;             /* labels, 400/700 */
 

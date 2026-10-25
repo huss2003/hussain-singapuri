@@ -113,7 +113,9 @@ function loadShell() {
 /** Build the HTML for a page route. Returns { status, html, meta }. */
 export function renderPage(pathname, nonce, base) {
   const meta = routeMeta(pathname, base);
-  let html = stripManagedTags(loadShell());
+  // asset version: a new deploy changes every CSS/JS URL, so browsers never mix old and new files
+  const v = (process.env.VERCEL_GIT_COMMIT_SHA || String(shellCache.mtimeMs)).slice(0, 10);
+  let html = stripManagedTags(loadShell()).replaceAll('{{v}}', v);
   const tags = headTags(meta, pathname, base);
   html = /<\/head>/i.test(html) ? html.replace(/<\/head>/i, `    ${tags}\n  </head>`) : `${tags}\n${html}`;
   return { status: meta.status, html: addNonce(html, nonce), meta };

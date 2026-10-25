@@ -13,11 +13,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;700&family=Big+Shoulders+Display:wght@800&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap">
-    <link rel="stylesheet" href="/css/tokens.css">
-    <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="/css/pages.css">
+    <link rel="stylesheet" href="/css/tokens.css?v={{v}}">
+    <link rel="stylesheet" href="/css/base.css?v={{v}}">
+    <link rel="stylesheet" href="/css/header.css?v={{v}}">
+    <link rel="stylesheet" href="/css/home.css?v={{v}}">
+    <link rel="stylesheet" href="/css/pages.css?v={{v}}">
 
     <!-- Boot config: inline on purpose so it needs the server's CSP nonce.
          Runs before first paint: applies the persisted theme and the reduced-motion class. -->
@@ -44,7 +44,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EasePack.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/app.js?v={{v}}"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

@@ -8,7 +8,7 @@
     { "source": "/(.*)", "destination": "/api/index" }
   ],
   "headers": [
-    { "source": "/(js|css)/(.*)", "headers": [{ "key": "cache-control", "value": "public, max-age=600, stale-while-revalidate=86400" }] },
+    { "source": "/(js|css)/(.*)", "headers": [{ "key": "cache-control", "value": "public, max-age=0, must-revalidate" }] },
     { "source": "/images/(.*)", "headers": [{ "key": "cache-control", "value": "public, max-age=86400, stale-while-revalidate=604800" }] }
   ]
 }
